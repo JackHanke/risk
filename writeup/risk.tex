@@ -1,0 +1,220 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{tikz}
+%\usepackage{subfig}
+\usepackage[english]{babel}
+%\usepackage{capt-of}
+\newtheorem{theorem}{Theorem}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes}
+\usepackage{hyperref}
+%might be unnecessary
+\usepackage{doi}
+%bibliography CMDS
+
+
+\usepackage{pdflscape}
+
+\usepackage{filecontents}
+\begin{filecontents*}{ohcrefs.bib}
+
+@article{klarner_1967, 
+title={Cell Growth Problems}, 
+volume={19}, DOI={10.4153/CJM-1967-080-4}, 
+journal={Canadian Journal of Mathematics}, 
+publisher={Cambridge University Press}, 
+author={Klarner, David A.}, 
+year={1967}, 
+pages={851–863}}
+
+@misc{minecraftwiki, 
+title={Tick}, 
+url={https://minecraft.fandom.com/wiki/Tick}, 
+journal={Minecraft Wiki}} 
+
+@article{_api_ski_2019,
+doi = {10.1016/j.jat.2019.105305},
+url = {https://doi.org/10.1016%2Fj.jat.2019.105305},
+year = 2019,
+month = {dec},
+publisher = {Elsevier {BV}
+},
+volume = {248},
+pages = {105305},
+author = {Tomasz M. {\L}api{\'{n}}ski},
+title = {Multivariate Laplace's approximation with estimated error and application to limit theorems},
+journal = {Journal of Approximation Theory}
+}}
+
+\end{filecontents*}
+
+\usepackage[style=alphabetic]{biblatex}
+\addbibresource{ohcrefs.bib}
+
+%%% With amsthm package, creates environments for nicely formatted,
+%%% labeled, and numbered propositions, etc.
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{fact}[thm]{Fact}
+
+\theoremstyle{definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{observ}[thm]{Observation}
+\newtheorem{open}[thm]{Open Problem}
+\newtheorem{prob.}[thm]{Problem}
+\newtheorem{quest}[thm]{Question}
+
+% I used these for making definitions and theorems, not what is above
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{note}[thm]{Note}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{exmp}{Example}[section]
+
+%nice quick solution
+\usepackage[margin=1in]{geometry}
+
+%doc info
+\title{RISK}
+\author{Jack Hanke}
+\date{\today}
+
+\begin{document}
+
+\thispagestyle{empty}
+\begin{landscape}
+
+\maketitle
+
+Let $t_{a,b}$ be the probability that $a$ attackers defeats $b$ defenders in the board game RISK. 
+
+\begin{theorem}
+
+$t_{a,b}$ can be exactly calculated. 
+
+\end{theorem}
+
+\begin{proof}
+The success chance $t_{a,b}$ has the following complicated recurrence relation. 
+
+Let 
+$$T(x,y) = \sum_{a,b \geq 0}t(a,b)x^a y^b .$$
+
+\begin{center}
+\def\arraystretch{1.5}
+\begin{tabular}{| c | c | }
+\hline
+ Relation & Domain \\ 
+ \hline
+ $t(0,b) = 0$ & $a=0,b \geq 0$ \\  
+ $t(1,b) = 0$ & $a=1,b \geq 0$ \\    
+ $t(a,0) = 1$ & $a \geq 2,b=0$ \\  
+ $t(2,b) = \left(\frac{55}{216}\right)^{b-1}\left(\frac{15}{36}\right)$ & $a=2,b \geq 1$ \\ 
+ $t(a,1) = 1 - \left(\frac{441}{1296}\right)^{a-3}\left(\frac{91}{216}\right)\left(\frac{21}{36}\right)$ & $a \geq 3,b=1$ \\    
+ $t(3,b) = \frac{295}{1296}t(3,b-2) + \left(\frac{55}{216}\right)^{b-2}\left(\frac{420}{1296}\right)\left(\frac{15}{36}\right)$ & $a=3,b \geq 2$ \\    
+ $t(a,b) = \frac{2890}{7776}t(a,b-2) + \frac{2611}{7776}t(a-1,b-1) + \frac{2275}{7776}t(a-2,b)$ & $a \geq 4,b \geq 2$ \\  
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+It can be shown using the above relation that that
+
+$$T(x,y) = \frac{x^{2}P(x,y)}{Q(x,y)}$$
+
+where
+
+$P(x,y) = 9043409375 x^{4} y^{4} - 35515935000 x^{4} y^{3} + 1666848925 x^{3} y^{4} - 52636437000 x y^{5} - 39729690000 x^{4} y^{2} + 64068612300 x^{3} y^{3} - 117017327700 x^{2} y^{4} + 207323109000 x y^{5} + 156029328000 x^{4} y + 662907777840 x^{3} y^{2} - 564006330720 x^{2} y^{3} + 900580161600 x y^{4} - 154686672000 y^{5} + 932460984000 x^{3} y - 1870090286400 x^{2} y^{2} - 235779828480 x y^{3} - 954637747200 y^{4} - 1123411161600 x^{3} - 1287684324864 x^{2} y - 3612316538880 x y^{2} + 1095781478400 y^{3} + 3301453209600 x^{2} + 601880315904 x y + 6762537123840 y^{2} + 3839844040704 x - 1828497162240 y - 11284439629824 
+$
+
+and
+
+$Q(x,y) = 36 (x - 1)(49 x - 144)(55 y - 216)(295 y^{2} - 1296)(2275 x^{2} + 2611 x y + 2890 y^{2} - 7776).
+$
+
+\end{proof}
+
+Let $T(x,y) = T_1(x,y) + T_2(x,y) + T_3(x,y) + T_4(x,y) + T_5(x,y)$, where $T_i$ is defined by the following.
+
+\begin{equation}
+    T_1(x,y) = -x^2\left(\frac{7776 + 7776x + 3240y + 3254xy}{(7776 - 2275x^2 - 2611xy - 2890y^2)}\right)
+\end{equation}
+
+\begin{equation}
+    T_2(x,y) = x^2\left(\frac{7776-2611xy-2275x^2}{(1-x)(7776 - 2275x^2 - 2611xy - 2890y^2)}\right)
+\end{equation}
+
+\begin{equation}
+    T_3(x,y) = x^2\left(\frac{7776+1260y-2611xy-2890y^2-\frac{91385}{216}xy^2 - \frac{50575}{108}y^3}{(1-\frac{55}{216}y)(7776 - 2275x^2 - 2611xy - 2890y^2)}\right)
+\end{equation}
+
+\begin{equation}
+    T_4(x,y) = x^2\left(\frac{3240y + \frac{3045}{2} xy - \frac{6965}{12} x^{2} y - \frac{2309125}{5184} x^{3} y - \frac{557375}{5184} x^{4} y}{(1-\frac{49}{144}x)(1-x)(7776 - 2275x^2 - 2611xy - 2890y^2)}\right)
+\end{equation}
+
+\begin{equation}
+    T_5(x,y) = x^2\left(\frac{7776 x + 3885 x y - \frac{240005}{72} x y^{2} - \frac{1871275}{1296} x y^{3} + \frac{46131625}{279936} x y^{4}}{(1-\frac{55}{216}y)(1-\frac{295}{1296}y^2)(7776 - 2275x^2 - 2611xy - 2890y^2)}\right)
+\end{equation}
+
+Now we define the following notation to solve the generating function.
+
+\begin{equation}
+    F(x,y) = \frac{1}{7776-2275x^2-2611xy-2890y^2}
+\end{equation}
+
+\begin{equation}
+    t_1(a,b) = F(x,y)[x^a][y^b] = \frac{1}{7776} \left(\frac{2275}{7776}\right)^{\frac{a}{2}} \left(\frac{2890}{7776}\right)^{\frac{b}{2}} \sum_{j=0}^{\frac{a+b}{2}}\frac{\left(\frac{a+b}{2}\right)!}{j!(j+\frac{a-b}{2})!(b-2j)!}\left(\frac{2611}{85\sqrt{910}}\right)^{b-2j}
+\end{equation}
+
+\begin{equation}
+    t_1(a,b) = F(x,y)[x^a][y^b] = \frac{1}{7776} \left(\frac{2275}{7776}\right)^{\frac{a}{2}} \left(\frac{2890}{7776}\right)^{\frac{b}{2}} \sum_{j=0}^{\frac{a+b}{2}}\binom{\frac{a+b}{2}}{\frac{a-b}{2}+2j}\binom{\frac{a-b}{2}+2j}{j}\left(\frac{2611}{85\sqrt{910}}\right)^{b-2j}
+\end{equation}
+
+you need to specify about $|a-b|$ TO DO
+
+\begin{equation}
+    t_2(a,b) = \frac{1}{(1-x)}F(x,y)[x^a][y^b] = \sum_{i=0}^a t_1(i,b)
+\end{equation}
+
+\begin{equation}
+    t_3(a,b) = \frac{1}{(1-\frac{55}{216}y)}F(x,y)[x^a][y^b] = \sum_{j=0}^b t_1(a,j)\left(\frac{55}{216}\right)^{b-j}
+\end{equation}
+
+\begin{equation}
+    t_4(a,b) =\frac{1}{(1-x)(1-\frac{49}{144}x)}F(x,y)[x^a][y^b] = \sum_{i_2=0}^a\sum_{i_1=0}^{i_2} t_1(i_1,b)\left(\frac{49}{144}\right)^{i_2-i_1}
+\end{equation}
+
+\begin{equation*}
+    t_5(a,b) = \frac{1}{(1-\frac{55}{216}y)(1-\frac{295}{1296}y^2)}F(x,y)[x^a][y^b] = \frac{1}{2} \sum_{i_2=0}^b\sum_{i_1=0}^{i_2} t_1(a,i_1)\left(\frac{55}{216}\right)^{b-i_2} \left(\left(\sqrt{\frac{295}{1296}}\right)^{i_2-i_1} + \left(-\sqrt{\frac{295}{1296}}\right)^{i_2-i_1}\right)
+\end{equation*}
+
+Then 
+
+%t_{n+2,m} = 7776 s_{n,m} + 7776s_{n-1,m} + 3240s_{n,m-1} + 3254s_{n-1,m-1} + 7776 u_{n,m} - 2611 u_{n-1,m-1} - 2275 u_{n-2,m} + 7776 v_{n,m} + 1260 v_{n,m-1} -2611v_{n-1,m-1} - 2890v_{n,m-2} - \frac{91385}{216} v_{n-1,m-2} - \frac{50575}{108}v_{n-m-3} + 11640 w_{n,m-1} + 54810 w_{n-1,m-1} + 47355 w_{n-2,m-1} + \frac{239125}{144}w_{n-3,m-1} + \frac{557375}{144}w_{n-4,m-1} + 7776x_{n-1,m} + \frac{15515}{4}x_{n-1,m-1} - \frac{240005}{72}x_{n-1,m-2} - \frac{22419175}{15552}x_{n-1,m-3} + \frac{46131625}{279936}x_{n-1,m-4}
+
+
+
+\begin{eqnarray*}
+t(a+2,b) & = & -7776 t_1(a,b) - 7776t_1(a-1,b) - 3240 t_1(a,b-1) - 3254 t_1(a-1,b-1) \\
+& & {} + 7776 t_2(a,b) - 2611 t_2(a-1,b-1) - 2275 t_2(a-2,b) \\
+& & {} + 7776 t_3(a,b) + 1260 t_3(a,b-1) -2611 t_3(a-1,b-1) - 2890 t_3(a,b-2) \\
+& & {} - \frac{91385}{216} t_3(a-1,b-2) - \frac{50575}{108}t_3(a,b-3) \\
+& & {} + 3240 t_4(a,b-1) + \frac{3045}{2}t_4(a-1,b-1) -  \frac{6965}{12} t_4(a-2,b-1) \\
+& & {} - \frac{2309125}{5184}t_4(a-3,b-1) -\frac{557375}{5184}t_4(a-4,b-1) \\
+& & {} + 7776 t_5(a-1,b) + 3885 t_5(a-1,b-1) - \frac{240005}{72} t_5(a-1,b-2) \\
+& & {} - \frac{1871275}{1296} t_5(a-1,b-3) + \frac{46131625}{279936} t_5(a-1,b-4) 
+\end{eqnarray*}
+
+\end{landscape}
+
+\end{document}

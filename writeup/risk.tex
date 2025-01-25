@@ -95,16 +95,16 @@ journal = {Journal of Approximation Theory}
 
 \maketitle
 
-Let $t_{a,b}$ be the probability that $a$ attackers defeats $b$ defenders in the board game RISK. 
+Let $t(a,b)$ be the probability that $a$ attackers defeats $b$ defenders in the board game RISK. 
 
 \begin{theorem}
 
-$t_{a,b}$ can be exactly calculated. 
+$t(a,b)$ can be exactly calculated. 
 
 \end{theorem}
 
 \begin{proof}
-The success chance $t_{a,b}$ has the following complicated recurrence relation. 
+The success chance $t(a,b)$ has the following complicated recurrence relation. 
 
 Let 
 $$T(x,y) = \sum_{a,b \geq 0}t(a,b)x^a y^b .$$
@@ -172,15 +172,13 @@ Now we define the following notation to solve the generating function.
     F(x,y) = \frac{1}{7776-2275x^2-2611xy-2890y^2}
 \end{equation}
 
-\begin{equation}
-    t_1(a,b) = F(x,y)[x^a][y^b] = \frac{1}{7776} \left(\frac{2275}{7776}\right)^{\frac{a}{2}} \left(\frac{2890}{7776}\right)^{\frac{b}{2}} \sum_{j=0}^{\frac{a+b}{2}}\frac{\left(\frac{a+b}{2}\right)!}{j!(j+\frac{a-b}{2})!(b-2j)!}\left(\frac{2611}{85\sqrt{910}}\right)^{b-2j}
-\end{equation}
+This function has coefficients 
 
 \begin{equation}
     t_1(a,b) = F(x,y)[x^a][y^b] = \frac{1}{7776} \left(\frac{2275}{7776}\right)^{\frac{a}{2}} \left(\frac{2890}{7776}\right)^{\frac{b}{2}} \sum_{j=0}^{\frac{a+b}{2}}\binom{\frac{a+b}{2}}{\frac{a-b}{2}+2j}\binom{\frac{a-b}{2}+2j}{j}\left(\frac{2611}{85\sqrt{910}}\right)^{b-2j}
 \end{equation}
 
-you need to specify about $|a-b|$ TO DO
+for even $a+b$ and $0$ otherwise. We similarly define
 
 \begin{equation}
     t_2(a,b) = \frac{1}{(1-x)}F(x,y)[x^a][y^b] = \sum_{i=0}^a t_1(i,b)
